@@ -4,7 +4,8 @@ from tkinter import Tk, Canvas, Frame, Label, \
 from tkinter.constants import DISABLED, NORMAL, RIGHT
 from threading import Thread, Event
 from time import sleep
-
+from deep_translator import GoogleTranslator
+from translate_test import translate_en_kr, translate_kr_en
 
 class ChatGUI:
     def __init__(self, callback, first_message="welcome to ChatBotAI", terminate="quit"):
@@ -15,8 +16,10 @@ class ChatGUI:
 
         Initialize the tkinter window and start the mainloop.
 
-        Canvas is used to create the window. Each message is created as
+        Canvas is used to create the window. Each message is created as]
+        
         """
+        
         # media path for bot images
         self.data_path = path.join(path.dirname(path.dirname(path.abspath(__file__))), "media")
 
@@ -63,6 +66,7 @@ class ChatGUI:
 
         self.root.mainloop()
 
+    
     def close_handler(self):
         """
         When the close button of MainWindow pressed we need to kill the active threads
@@ -156,11 +160,16 @@ class ChatGUI:
         """
         Call the bot handler and add the result to bot_message
         """
+        message = translate_kr_en(message)
         bot_message = self.callback(message)
+        
         while not self.thread_event.is_set():
             sleep(0.1)
+        
+        bot_message = translate_en_kr(bot_message)
         self.add_bot_message(bot_message)
 
+        
     def user_input_handler(self, event):
         """
         User InputBox widget

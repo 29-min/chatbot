@@ -2,13 +2,15 @@ from chatbot import Chat, register_call
 import os
 import wikipedia
 
+from translate_test import translate_en_kr, translate_kr_en
+
 import warnings
 warnings.filterwarnings("ignore")
 
 
 @register_call("do_you_know")
 def do_you_know(session=None, query=None):
-    return "I do not know about " + query
+    return ("I do not know about " + query)
 
 @register_call("who_is")
 def who_is(session=None, query='South Korea'):
