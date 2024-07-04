@@ -5,7 +5,7 @@ from tkinter.constants import DISABLED, NORMAL, RIGHT
 from threading import Thread, Event
 from time import sleep
 from deep_translator import GoogleTranslator
-
+from translate_test import translate_en_kr, translate_kr_en
 
 class ChatGUI:
     def __init__(self, callback, first_message="welcome to ChatBotAI", terminate="quit"):
@@ -160,9 +160,6 @@ class ChatGUI:
         """
         Call the bot handler and add the result to bot_message
         """
-        translator_en_kr = GoogleTranslator(source='en', target='korean')
-        translator_kr_en = GoogleTranslator(source='korean', target='en')
-        
         message = translate_kr_en(message)
         bot_message = self.callback(message)
         
@@ -173,10 +170,6 @@ class ChatGUI:
         self.add_bot_message(bot_message)
 
         
-    def translate_en_kr(message):
-        return translator_en_kr.translate(message)
-    def translate_kr_en(message):
-        return translator_kr_en.translate(message)
     def user_input_handler(self, event):
         """
         User InputBox widget
