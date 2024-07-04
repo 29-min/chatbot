@@ -4,6 +4,6 @@
 {% endblock %}
 
 {% block %}
-    {% client %}(who is) (?P<query>.*){% endclient %}
+    {% client %}(do you know about|who is|what is) (?P<query>.*){% endclient %}
     {% response %}{% call who_is: %query %}{% endresponse %}
 {% endblock %}
